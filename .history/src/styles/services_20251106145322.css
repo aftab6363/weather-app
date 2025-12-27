@@ -1,0 +1,304 @@
+/* ===== Services Page ===== */
+body {
+  padding-top: 80px;
+}
+.dashboard-page {
+  font-family: "Poppins", sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+/* ===== Header Section ===== */
+.dashboard-header {
+  text-align: center;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  padding: 4rem 1rem 3rem;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.dashboard-header p {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* ===== Service Cards Section ===== */
+.dashboard-section {
+  margin-top: 3rem;
+  padding: 0 5%;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* ✅ 2 cards per row */
+  gap: 2.5rem;
+  justify-items: center;
+  align-items: stretch;
+}
+
+.dashboard-card {
+  background-color: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.dashboard-card h3 {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: #1e3a8a;
+}
+
+.dashboard-card p {
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.6;
+  padding: 0.8rem 1rem 1.5rem;
+}
+
+/* ===== Animation ===== */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 992px) {
+  .service-cards {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* stack gracefully */
+  }
+}
+
+@media (max-width: 768px) {
+  .services-header h1 {
+    font-size: 2rem;
+  }
+
+  .dashboard-card img {
+    height: 200px;
+  }
+}
+
+  /* ===== CTA Section ===== */
+.cta-section {
+  margin-top: 4rem;
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(59, 130, 246, 0.9)),
+              url("/assets/hero_weather.jpg") center/cover no-repeat;
+  color: white;
+  text-align: center;
+  border-radius: 40px;
+  width: 90%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.cta-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); /* ✅ safe now */
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 0;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.cta-content p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #e0e7ff;
+  margin-bottom: 2rem;
+}
+
+.cta-btn {
+  background: white;
+  color: #1d4ed8;
+  border: none;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+}
+
+.cta-btn:hover {
+  background: #1d4ed8;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(255, 255, 255, 0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 3rem 1rem;
+    border-radius: 30px;
+  }
+
+  .cta-content h2 {
+    font-size: 1.6rem;
+  }
+
+  .cta-content p {
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== Info Section ===== */
+.info-section {
+  background-color: #f9fafb;
+  padding: 5rem 8%;
+  text-align: center;
+}
+  
+.info-section h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+  
+.info-desc {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ✅ MODERNIZED INFO CARDS */
+/* ===== Modern Info Cards ===== */
+
+.info-cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 25px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.info-card {
+  background: rgba(105, 179, 22, 0.12);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(14px); 
+  border-radius: 20px;
+  padding: 25px 30px;
+  width: 300px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  cursor: pointer;
+}
+
+.info-card:hover {
+  transform: translateY(-10px);
+  border-color: #00b4ff;
+  box-shadow: 0px 8px 25px rgba(0, 160, 255, 0.25);
+}
+
+.info-card h3 {
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1d1c1c;
+}
+
+.info-card p {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #4b4646;
+  line-height: 1.5;
+}
+
+/* Icon Glow Style */
+.info-icon {
+  font-size: 42px;
+  color: #00b4ff;
+  filter: drop-shadow(0px 0px 10px rgba(0, 180, 255, 0.55));
+  transition: 0.3s;
+}
+
+.info-card:hover .info-icon {
+  transform: scale(1.15);
+  filter: drop-shadow(0px 0px 18px rgba(0, 180, 255, 0.8));
+}
+
+/* .logout-btn {
+  padding: 10px 32px;
+  font-size: 16px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.logout-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0px 12px 22px rgba(0, 0, 0, 0.25);
+}
+
+.logout-btn:active {
+  transform: scale(0.97);
+} */
+

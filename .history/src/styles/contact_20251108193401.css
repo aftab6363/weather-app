@@ -1,0 +1,143 @@
+/* ===== Contact Page Premium UI ===== */
+
+.contact-wrapper {
+  padding: 4rem 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3a8a, #111827);
+  min-height: 100vh;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  max-width: 700px;
+}
+.contact-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+}
+.contact-header p {
+  margin-top: 0.7rem;
+  color: #d1d5db;
+  font-size: 1.08rem;
+}
+
+/* Contact Cards */
+.contact-cards {
+  display: flex;
+  gap: 2rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.contact-card {
+  background: rgba(255,255,255,0.12);
+  padding: 1.8rem 2rem;
+  border-radius: 14px;
+  text-align: center;
+  width: 260px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: transform 0.3s;
+}
+.contact-card:hover {
+  transform: translateY(-6px);
+}
+.contact-icon {
+  font-size: 2.4rem;
+  color: #facc15;
+  margin-bottom: 12px;
+}
+
+/* Form */
+.contact-box {
+  width: 100%;
+  max-width: 650px;
+  padding: 2.3rem;
+  margin-bottom: 3rem;
+  background: rgba(255,255,255,0.12);
+  border-radius: 18px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.input-group label {
+  color: #facc15;
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 600;
+}
+.contact-box input,
+.contact-box textarea {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.18);
+  border: none;
+  color: white;
+  outline: none;
+}
+
+/* Button */
+.send-btn {
+  width: 100%;
+  background: #facc15;
+  color: #111827;
+  padding: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.send-btn:hover {
+  background: #ffdd4a;
+  transform: translateY(-4px);
+}
+
+/* Social Icons */
+.social-links {
+  display: flex;
+  gap: 1.2rem;
+  margin-bottom: 3rem;
+}
+.social-links a {
+  color: #facc15;
+  font-size: 1.8rem;
+  transition: 0.3s ease;
+}
+.social-links a:hover {
+  transform: scale(1.2);
+}
+
+/* Map */
+.map-container {
+  width: 100%;
+  max-width: 850px;
+  height: 350px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+}
+
+/* Fade animations */
+.fade-in { animation: fade 1s forwards; opacity: 0; }
+.fade-in-delay { animation: fade 1s forwards 0.4s; opacity: 0; }
+.fade-in-delay2 { animation: fade 1s forwards 0.8s; opacity: 0; }
+.fade-in-delay3 { animation: fade 1s forwards 1.2s; opacity: 0; }
+.fade-in-delay4 { animation: fade 1s forwards 1.6s; opacity: 0; }
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}

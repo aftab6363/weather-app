@@ -1,0 +1,324 @@
+/* ----------------------------------
+   HOME PAGE STYLING
+---------------------------------- */
+/* Add space below navbar so page content is not hidden */
+body {
+  padding-top: 10px;
+}
+
+/* ===== HOME PAGE (Hero Section) ===== */
+.home {
+  width: 100%;
+  min-height: 88vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  background-image: url("/src/assets/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.home::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.home-content {
+  position: relative;
+  color: white;
+  max-width: 700px;
+}
+
+.home-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.home-content p {
+  font-size: 1.22rem;
+}
+
+
+/* ===== HERO SECTION ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  margin-top: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+  
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.45);
+  position: absolute;
+  inset: 0;
+}
+  
+.hero-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8%;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+}
+  
+.hero-left {
+  flex: 1;
+  max-width: 550px;
+}
+  
+.hero-left h1 {
+  font-size: 3.2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+  
+.hero-left .highlight {
+  color: #facc15;
+}
+  
+.hero-left p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  color: #e5e7eb;
+}
+
+/* ===== MODERN WEATHER SEARCH BAR ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.8rem;
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  padding: 6px 10px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.search-bar:hover {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 12px 14px;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.search-bar input::placeholder {
+  color: #d9d9d9;
+  font-weight: 500;
+}
+
+.search-bar input:focus {
+  box-shadow: 0 0 0 2px #facc15;
+}
+
+.search-bar button {
+  padding: 10px 20px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #4ca1ff, #5d76ff);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.search-bar button:hover {
+  background: linear-gradient(90deg, #5d76ff, #4ca1ff);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+  
+.hero-btn {
+  background-color: #facc15;
+  color: #111827;
+  padding: 0.9rem 1.8rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+  
+.hero-btn:hover {
+  background-color: #fbbf24;
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+}
+  
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+.hero-right img {
+  width: 90%;
+  max-width: 500px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.4));
+}
+  
+/* ===== Hero Animations ===== */
+.fade-in,
+.fade-in-delay,
+.fade-in-delay2,
+.fade-in-right {
+  opacity: 0;
+}
+  
+.fade-in {
+  animation: fadeInUp 1s ease forwards;
+}
+  
+.fade-in-delay {
+  animation: fadeInUp 1s ease forwards 0.4s;
+}
+  
+.fade-in-delay2 {
+  animation: fadeInUp 1s ease forwards 0.8s;
+}
+  
+.fade-in-right {
+  animation: fadeInRight 1s ease forwards 1s;
+}
+  
+@keyframes fadeInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+  
+@keyframes fadeInRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ===== Cities Weather Section ===== */
+.cities-weather {
+  padding: 5rem 8%;
+  background-color: #eef2ff;
+  text-align: center;
+}
+  
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 0.5rem;
+}
+  
+.section-subtitle {
+  color: #4b5563;
+  margin-bottom: 3rem;
+}
+  
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+}
+  
+.city-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+  
+.city-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+  
+.city-img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+  
+.city-info {
+  padding: 1.2rem;
+}
+  
+.city-info h3 {
+  color: #1e3a8a;
+  margin-bottom: 0.4rem;
+}
+
+/* ===== Future API Section ===== */
+.future-api {
+  padding: 5rem 8%;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  color: #ffffff;
+  text-align: center;
+}
+  
+.api-btn {
+  background-color: #facc15;
+  color: #111827;
+  padding: 0.9rem 1.8rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* ===== Scroll Reveal Animation ===== */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+  
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .hero-right img {
+    width: 80%;
+    margin-bottom: 1.5rem;
+  }
+  .info-card {
+    width: 90%;
+  }
+}

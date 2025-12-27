@@ -1,0 +1,155 @@
+/* ===== Global Fix to avoid content hiding behind navbar ===== */
+
+/* ===== NAVBAR BASE ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(4, 8, 233, 0.5);   /* Transparent start */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); 
+  transition: background 0.35s ease, padding 0.35s ease;
+  z-index: 999;
+}
+
+/* Solid background when scrolling */
+.navbar.scrolled {
+  background: rgba(11, 44, 89, 0.9);
+  padding: 12px 60px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+}
+
+/* ===== BRAND (LEFT SIDE) ===== */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.nav-brand i {
+  color: #facc15;
+  font-size: 1.75rem;
+}
+
+/* ===== NAV LINKS ===== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  list-style: none;
+  transition: .35s ease;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e9f1ff;
+  font-weight: 500;
+  position: relative;
+  transition: all .3s ease;
+}
+
+/* Modern hover underline animation */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0%;
+  background: #facc15;
+  transition: .3s ease;
+}
+
+.nav-links a:hover {
+  color: #facc15;
+  transform: translateY(-1px);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ===== BUTTONS (Register & Login unified style) ===== */
+.btn {
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.3s ease;
+  border: 4px solid transparent;
+}
+
+/* Register = filled button */
+.register-btn {
+  border: 2px solid #facc15;
+  color: #facc15;
+  
+}
+.register-btn:hover {
+  background: #facc15;
+  color: #111;
+}
+
+/* Login = outline button but now visually matched */
+.login-btn {
+  border: 2px solid #facc15;
+  color: #facc15;
+}
+.login-btn:hover {
+  background: #facc15;
+  color: #111;
+}
+
+/* ===== MOBILE MENU ===== */
+.menu-icon {
+  display: none;
+  color: #ffffff;
+  font-size: 1.85rem;
+  cursor: pointer;
+}
+
+@media (max-width: 850px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    flex-direction: column;
+    width: 100%;
+    padding: 1.3rem 0;
+    background: rgba(11, 44, 89, 0.95);
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+} 
+
+.logout-btn {
+  background: #d9534f;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+  background: #b52b27;
+  transform: scale(1.05);
+}
+
+
+

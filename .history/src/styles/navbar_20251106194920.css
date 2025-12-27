@@ -1,0 +1,149 @@
+/* ===== NAVBAR WRAPPER ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(93, 118, 255, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.4rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px); 
+  z-index: 999;
+  transition: all 0.3s ease;
+}
+
+/* ===== LOGO ===== */
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.navbar .logo i {
+  font-size: 2rem;
+  color: #ffd500;
+  transition: transform 0.3s ease;
+}
+
+.navbar .logo i:hover {
+  transform: rotate(20deg);
+}
+
+/* ===== NAVIGATION LINKS ===== */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: #f8fafc;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 5px 0;
+  transition: 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: #ffe88c;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #ffe88c;
+  transform: translateY(-2px);
+}
+
+/* ===== BUTTONS ===== */
+.nav-btn {
+  padding: 10px 22px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.register-btn {
+  background: linear-gradient(90deg, #6c63ff, #4ca1ff);
+  color: #fff;
+}
+
+.register-btn:hover {
+  background: linear-gradient(90deg, #4ca1ff, #6c63ff);
+  transform: translateY(-2px);
+}
+
+.login-btn {
+  background: linear-gradient(90deg, #ff5f6d, #ffc371);
+  color: #fff;
+}
+
+.login-btn:hover {
+  background: linear-gradient(90deg, #ffc371, #ff5f6d);
+  transform: translateY(-2px);
+}
+
+/* ===== MOBILE ===== */
+.menu-icon {
+  display: none;
+  font-size: 1.9rem;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.3s ease;
+}
+
+.menu-icon:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 850px) {
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    background: rgba(45, 98, 255, 0.95);
+    padding: 1.4rem 0;
+    display: none;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a, .nav-btn {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}

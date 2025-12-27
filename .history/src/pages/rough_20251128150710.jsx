@@ -1,0 +1,296 @@
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import "../styles/weatherDetails.css";
+
+const WeatherDetails = () => {
+  const { city } = useParams();
+  const navigate = useNavigate();
+
+  const [forecast, setForecast] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const fetchForecast = async (cityName) => {
+    try {
+      setLoading(true);
+      setError("");
+      setForecast([]);
+
+      const res = await fetch(
+        `http://localhost:5000/api/weather/5days/${encodeURIComponent(cityName)}`
+      );
+
+      if (!res.ok) {
+        let msg = `Status: ${res.status}`;
+        try {
+          const body = await res.json();
+          msg = body.message || body.error || msg;
+        } catch {}
+        throw new Error(msg);
+      }
+
+      const data = await res.json();
+
+      if (!data || !Array.isArray(data)) {
+        throw new Error("Unexpected data format");
+      }
+
+      setForecast(data);
+    } catch (err) {
+      console.error("5-day forecast error:", err);
+      setError(err.message || "Failed to load forecast");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 🔥 REMOVE LOCAL ICON MAPPING — Not needed anymore
+
+  useEffect(() => {
+    if (city) fetchForecast(city);
+  }, [city]);
+
+  return (
+    <div className="weather-details-page">
+      <div className="weather-details-container">
+        <div className="summary-header">
+          <h1 className="summary-title">5-Day Weather Forecast</h1>
+          <p className="summary-city">{city}</p>
+        </div>
+
+        {loading && <div className="loading-text">Loading weather...</div>}
+        {error && <div className="error-text">{error}</div>}
+
+        {!loading && !error && forecast.length > 0 && (
+          <div className="forecast-section">
+            <div className="forecast-grid">
+              {forecast.map((item, index) => {
+                const date = new Date(item.dt * 1000);
+                const desc = item.weather?.description || "";
+                const temp = Math.round(item.temp?.day || item.feels_like?.day);
+                const humidity = item.humidity;
+                const wind = item.wind_speed;
+
+                // 🔥 USE OFFICIAL OPENWEATHER ICONS
+                const iconUrl = `https://openweathermap.org/img/wn/${item.weather?.icon}@4x.png`;
+
+                return (
+                  <div className="forecast-card" key={index}>
+                    <div className="forecast-day">
+                      {date.toLocaleDateString(undefined, {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </div>
+
+                    {/* WEATHER ICON */}
+                    <img
+                      src={iconUrl}
+                      alt={desc}
+                      className="forecast-icon"
+                    />
+
+                    <div className="forecast-temp">{temp}°C</div>
+
+                    <div className="forecast-desc">{desc}</div>
+
+                    <div className="forecast-info">
+                      <p>Humidity: {humidity}%</p>
+                      <p>Wind: {wind} m/s</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <button className="back-btn" onClick={() => navigate(-1)}>
+              ← Back
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default WeatherDetails;
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================
+   Weather Details - 5 Day UI
+   Glassmorphism + Dynamic BG
+   ============================= */
+
+/* --- Dynamic Backgrounds --- */
+.weather-details-page {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transition: background-image 0.5s ease;
+  }
+  
+  .clear-bg {
+    background: url("../assets/clear.jpg") center/cover no-repeat;
+  }
+  
+  .cloud-bg {
+    background: url("../assets/clouds.jpg") center/cover no-repeat;
+  }
+  
+  .rain-bg {
+    background: url("../assets/rain.jpg") center/cover no-repeat;
+  }
+  
+  .storm-bg {
+    background: url("../assets/storm.jpg") center/cover no-repeat;
+  }
+  
+  .snow-bg {
+    background: url("../assets/snow.jpg") center/cover no-repeat;
+  }
+  
+  .default-bg {
+    background: url("../assets/hero_weather.jpg") center/cover no-repeat;
+  }
+  
+  /* --- Main Container --- */
+  .weather-details-container {
+    width: 90%;
+    max-width: 1050px;
+    padding: 35px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    animation: fadeIn 1s ease;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  }
+  
+  /* --- Summary Header --- */
+  .summary-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  
+  .summary-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 0 12px rgba(255,255,255,0.5);
+  }
+  
+  .summary-city {
+    font-size: 20px;
+    color: #e8f7ff;
+    margin-top: 5px;
+  }
+  
+  /* --- Forecast Section --- */
+  .forecast-section {
+    margin-top: 20px;
+  }
+  
+  .forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+  }
+  
+  /* --- Forecast Card --- */
+  .forecast-card {
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    text-align: center;
+    animation: fadeIn 0.8s ease, scaleIn 0.6s ease;
+    transition: transform 0.3s ease;
+  }
+  
+  .forecast-card:hover {
+    transform: translateY(-7px) scale(1.06);
+  }
+  
+  .forecast-day {
+    color: #dff6ff;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .forecast-icon {
+    width: 70px;
+    animation: iconFloat 3s infinite ease-in-out;
+  }
+  
+  .forecast-temp {
+    margin: 5px 0;
+    font-size: 26px;
+    color: white;
+    font-weight: 700;
+  }
+  
+  .forecast-desc {
+    font-size: 15px;
+    color: #d4efff;
+    margin-bottom: 10px;
+  }
+  
+  .forecast-info p {
+    font-size: 14px;
+    color: #e8f8ff;
+    margin: 3px 0;
+  }
+  
+  /* --- Back Button --- */
+  .back-btn {
+    margin-top: 30px;
+    padding: 12px 22px;
+    border-radius: 14px;
+    background: linear-gradient(120deg, #009dff, #7c5bff);
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+  }
+  
+  .back-btn:hover {
+    transform: translateY(-3px);
+    opacity: 0.9;
+  }
+  
+  /* --- Animations --- */
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes scaleIn {
+    0% {transform: scale(0.7); opacity: 0;}
+    100% {transform: scale(1); opacity: 1;}
+  }
+  
+  @keyframes iconFloat {
+    0% {transform: translateY(0);}
+    50% {transform: translateY(-6px);}
+    100% {transform: translateY(0);}
+  }
+  
