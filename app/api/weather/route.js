@@ -18,7 +18,6 @@ export async function GET(req) {
         const response = await axios.get(url);
         const data = response.data;
 
-        // Normalized response for frontend
         const normalized = {
             city: `${data.name}${data.sys?.country ? ", " + data.sys.country : ""}`,
             temp: data.main?.temp,
@@ -42,15 +41,12 @@ export async function GET(req) {
             const status = error.response.status;
             const msg =
                 status === 404
-                    ? `City not found: ${new URL(req.url).searchParams.get("city")}`
+                    ? `City not found: ${city}`
                     : error.response.data?.message || "Failed to fetch weather data";
 
             return NextResponse.json({ message: msg }, { status });
         }
 
-        return NextResponse.json(
-            { message: "Failed to fetch weather data" },
-            { status: 500 }
-        );
+        return NextResponse.json({ message: "Failed to fetch weather data" }, { status: 500 });
     }
 }

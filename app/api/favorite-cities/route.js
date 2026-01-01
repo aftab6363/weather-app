@@ -5,41 +5,27 @@ import FavoriteCity from "@/lib/models/FavoriteCity";
 export async function POST(req) {
     try {
         await dbConnect();
-        const { userId, cityName, customName, isFavorite } = await req.json();
+        const { userId, cityName, customName } = await req.json();
 
-        if (!userId) return NextResponse.json({ error: "userId is required" }, { status: 400 });
-        if (!cityName) return NextResponse.json({ error: "City name is required" }, { status: 400 });
+        if (!userId || !cityName) {
+            return NextResponse.json({ message: "User ID and City Name are required" }, { status: 400 });
+        }
 
-        // Check if city already exists for this user
         const existingCity = await FavoriteCity.findOne({ userId, cityName });
         if (existingCity) {
-            return NextResponse.json(
-                { success: false, error: "City already saved" },
-                { status: 400 }
-            );
+            return NextResponse.json({ message: "City already in favorites" }, { status: 400 });
         }
 
         const newCity = new FavoriteCity({
             userId,
             cityName,
-            customName,
-            isFavorite: !!isFavorite,
+            customName: customName || cityName,
         });
-        await newCity.save();
 
-        return NextResponse.json(
-            {
-                success: true,
-                message: "City saved successfully",
-                city: newCity,
-            },
-            { status: 201 }
-        );
-    } catch (err) {
-        console.error("Save City Error:", err);
-        return NextResponse.json(
-            { success: false, error: "Failed to save city" },
-            { status: 500 }
-        );
+        await newCity.save();
+        return NextResponse.json({ message: "City saved to favorites!", city: newCity }, { status: 201 });
+    } catch (error) {
+        console.error("Save City Error:", error);
+        return NextResponse.json({ message: "Server Error" }, { status: 500 });
     }
 }

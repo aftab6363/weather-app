@@ -7,27 +7,23 @@ export async function DELETE(req) {
         await dbConnect();
         const { cityId } = await req.json();
 
-        if (!cityId) return NextResponse.json({ error: "cityId is required" }, { status: 400 });
+        if (!cityId) {
+            return NextResponse.json({ message: "cityId is required" }, { status: 400 });
+        }
 
         const deletedCity = await FavoriteCity.findByIdAndDelete(cityId);
 
         if (!deletedCity) {
-            return NextResponse.json({ success: false, error: "City not found" }, { status: 404 });
+            return NextResponse.json({ success: false, message: "City not found" }, { status: 404 });
         }
 
-        return NextResponse.json(
-            {
-                success: true,
-                message: "City deleted successfully",
-                city: deletedCity,
-            },
-            { status: 200 }
-        );
-    } catch (err) {
-        console.error("Delete City Error:", err);
-        return NextResponse.json(
-            { success: false, error: "Failed to delete city" },
-            { status: 500 }
-        );
+        return NextResponse.json({
+            success: true,
+            message: "City deleted successfully",
+            city: deletedCity,
+        });
+    } catch (error) {
+        console.error("Delete City Error:", error);
+        return NextResponse.json({ success: false, message: "Failed to delete city" }, { status: 500 });
     }
 }

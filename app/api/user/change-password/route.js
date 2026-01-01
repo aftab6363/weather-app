@@ -22,7 +22,6 @@ export async function PUT(req) {
             );
         }
 
-        // Direct string comparison
         if (user.password !== oldPassword) {
             return NextResponse.json(
                 { success: false, message: "Incorrect old password" },

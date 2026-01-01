@@ -1,6 +1,6 @@
 // components/SaveCityButton.jsx
 import React from "react";
-import  "../styles/home.css";
+import "../styles/home.css";
 
 export default function SaveCityButton({ cityName }) {
   const handleSaveCity = async () => {
@@ -8,7 +8,7 @@ export default function SaveCityButton({ cityName }) {
     if (!loggedUser) return alert("Please login first");
 
     try {
-      const response = await fetch("http://localhost:5000/api/favorite-cities", {
+      const response = await fetch("/api/favorite-cities", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

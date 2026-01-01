@@ -31,7 +31,7 @@ export default function Dashboard() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/api/favorite-cities/${userId}`);
+      const res = await fetch(`/api/favorite-cities/${userId}`);
       if (!res.ok) throw new Error("Failed to fetch cities");
       const data = await res.json();
       const cities = data.cities || [];
@@ -82,7 +82,7 @@ export default function Dashboard() {
     if (!window.confirm(`Are you sure you want to ${type === "saved" ? "unsave" : "remove from favorite"} this city?`)) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/favorite-cities/delete", {
+      const res = await fetch("/api/favorite-cities/delete", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cityId }),
@@ -102,7 +102,7 @@ export default function Dashboard() {
     const updatedCity = { ...city, isFavorite: !city.isFavorite };
 
     try {
-      const res = await fetch("http://localhost:5000/api/favorite-cities/favorite", {
+      const res = await fetch("/api/favorite-cities/favorite", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cityId: city._id, isFavorite: updatedCity.isFavorite }),
@@ -136,10 +136,10 @@ export default function Dashboard() {
 
     const fetchUsersCount = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/user/count");
+        const res = await fetch("/api/user/count");
         const data = await res.json();
         if (data.success) setTotalUsers(data.count);
-      } catch {}
+      } catch { }
     };
 
     fetchUsersCount();
@@ -258,25 +258,25 @@ export default function Dashboard() {
           <h2>Saved Cities</h2>
           {loadingCities ? <p>Loading saved cities...</p> :
             citiesError ? <p className="error-text">{citiesError}</p> :
-            savedCities.length === 0 ? <p>No saved cities yet.</p> :
-            <div className="cities-grid">
-              {savedCities.map(city => (
-                <div key={city._id} className="city-card" onClick={() => goToDetails(city.cityName)}>
-                  <h3 className="city-name">{city.customName || city.cityName}</h3>
-                  <p className="city-condition">{city.condition}</p>
-                  <p className="city-temp">{city.temp !== null ? `${Math.round(city.temp)}°C` : "—"}</p>
-                  {city.icon ? (
-                    <img className="city-icon" src={`https://openweathermap.org/img/wn/${city.icon}@2x.png`} alt="" />
-                  ) : (
-                    <div className="city-icon placeholder">🌥️</div>
-                  )}
-                  <div className="city-actions">
-                    <button className="remove-btn" onClick={(e) => { e.stopPropagation(); removeCity(city._id); }}>Remove</button>
-                    <button className="remove-btn" onClick={(e) => { e.stopPropagation(); toggleFavorite(city); }}>Add Favorite</button>
-                  </div>
+              savedCities.length === 0 ? <p>No saved cities yet.</p> :
+                <div className="cities-grid">
+                  {savedCities.map(city => (
+                    <div key={city._id} className="city-card" onClick={() => goToDetails(city.cityName)}>
+                      <h3 className="city-name">{city.customName || city.cityName}</h3>
+                      <p className="city-condition">{city.condition}</p>
+                      <p className="city-temp">{city.temp !== null ? `${Math.round(city.temp)}°C` : "—"}</p>
+                      {city.icon ? (
+                        <img className="city-icon" src={`https://openweathermap.org/img/wn/${city.icon}@2x.png`} alt="" />
+                      ) : (
+                        <div className="city-icon placeholder">🌥️</div>
+                      )}
+                      <div className="city-actions">
+                        <button className="remove-btn" onClick={(e) => { e.stopPropagation(); removeCity(city._id); }}>Remove</button>
+                        <button className="remove-btn" onClick={(e) => { e.stopPropagation(); toggleFavorite(city); }}>Add Favorite</button>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
           }
         </div>
       </main>

@@ -5,9 +5,7 @@ import User from "@/lib/models/user";
 export async function DELETE(req, { params }) {
     try {
         await dbConnect();
-        const { id } = await params;
-
-        // Validate ID format if necessary, but mongoose handles it mostly
+        const { id } = await params; // Next.js 15+ params are async
 
         const deletedUser = await User.findByIdAndDelete(id);
 
@@ -22,6 +20,7 @@ export async function DELETE(req, { params }) {
             success: true,
             message: "Account deleted successfully",
         });
+
     } catch (err) {
         console.error("Delete Account Error:", err);
         return NextResponse.json(

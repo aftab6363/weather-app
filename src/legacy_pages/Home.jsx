@@ -11,7 +11,7 @@ import "../styles/home.css";
 
 function Home() {
   const navigate = useNavigate();
-  
+
   const [city, setCity] = useState("");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -29,7 +29,7 @@ function Home() {
 
     try {
       // Use full backend URL
-      const res = await fetch(`http://localhost:5000/api/weather?city=${encodeURIComponent(q)}`);
+      const res = await fetch(`/api/weather?city=${encodeURIComponent(q)}`);
 
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
@@ -63,19 +63,19 @@ function Home() {
 
   const handleSearch = () => {
     const user = localStorage.getItem("user");
-  
+
     // ✅ If NOT logged in → redirect to login
     if (!user) {
       navigate("/login");
       return;
     }
-  
+
     // ✅ If logged in → proceed
     if (!city.trim()) return;
-  
+
     navigate(`/weather/${city}`);
   };
-  
+
 
 
   const handleKeyDown = (e) => {
@@ -214,7 +214,7 @@ function Home() {
                     onClick={() => {
                       setCity("New York");
                       fetchWeather("New York");
-                    } }
+                    }}
                   >
                     🗽 New York
                   </span>
@@ -223,7 +223,7 @@ function Home() {
                     onClick={() => {
                       setCity("Tokyo");
                       fetchWeather("Tokyo");
-                    } }
+                    }}
                   >
                     🗼 Tokyo
                   </span>
@@ -232,7 +232,7 @@ function Home() {
                     onClick={() => {
                       setCity("Paris");
                       fetchWeather("Paris");
-                    } }
+                    }}
                   >
                     🗼 Paris
                   </span>

@@ -7,10 +7,14 @@ export async function PUT(req) {
         await dbConnect();
         const { cityId, cityName, customName, isFavorite } = await req.json();
 
-        if (!cityId) return NextResponse.json({ error: "cityId is required" }, { status: 400 });
+        if (!cityId) {
+            return NextResponse.json({ message: "cityId is required" }, { status: 400 });
+        }
 
         const city = await FavoriteCity.findById(cityId);
-        if (!city) return NextResponse.json({ success: false, error: "City not found" }, { status: 404 });
+        if (!city) {
+            return NextResponse.json({ success: false, message: "City not found" }, { status: 404 });
+        }
 
         if (cityName) city.cityName = cityName;
         if (customName) city.customName = customName;
@@ -19,19 +23,13 @@ export async function PUT(req) {
         city.updatedAt = new Date();
         await city.save();
 
-        return NextResponse.json(
-            {
-                success: true,
-                message: "City updated successfully",
-                city,
-            },
-            { status: 200 }
-        );
-    } catch (err) {
-        console.error("Update City Error:", err);
-        return NextResponse.json(
-            { success: false, error: "Failed to update city" },
-            { status: 500 }
-        );
+        return NextResponse.json({
+            success: true,
+            message: "City updated successfully",
+            city,
+        });
+    } catch (error) {
+        console.error("Update City Error:", error);
+        return NextResponse.json({ success: false, message: "Failed to update city" }, { status: 500 });
     }
 }

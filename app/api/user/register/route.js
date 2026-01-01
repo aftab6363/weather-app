@@ -22,7 +22,6 @@ export async function POST(req) {
             );
         }
 
-        // Store password as plain text (legacy behavior)
         const newUser = new User({
             name: fullName,
             email,

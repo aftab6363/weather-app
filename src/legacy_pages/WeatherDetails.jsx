@@ -13,29 +13,29 @@ const WeatherDetails = () => {
   const [saveMsg, setSaveMsg] = useState("");
 
   // ✅ Check login on page load
-    useEffect(() => {
-      const stored = localStorage.getItem("user");
-    
-      if (!stored) {
-        navigate("/login");
-        return;
-      }
-    
-      let user = null;
-    
-      try {
-        user = JSON.parse(stored);
-      } catch {
-        navigate("/login");
-        return;
-      }
-    
-      if (!user || (!user._id && !user.id)) {
-        navigate("/login");
-        return;
-      }
-    }, [navigate]);
-  
+  useEffect(() => {
+    const stored = localStorage.getItem("user");
+
+    if (!stored) {
+      navigate("/login");
+      return;
+    }
+
+    let user = null;
+
+    try {
+      user = JSON.parse(stored);
+    } catch {
+      navigate("/login");
+      return;
+    }
+
+    if (!user || (!user._id && !user.id)) {
+      navigate("/login");
+      return;
+    }
+  }, [navigate]);
+
 
   // ✅ FIXED: Safe city validation (NO redirect when coming from premium cards)
   useEffect(() => {
@@ -54,7 +54,7 @@ const WeatherDetails = () => {
       setForecast([]);
 
       const res = await fetch(
-        `http://localhost:5000/api/weather/5days/${encodeURIComponent(cityName)}`
+        `/api/weather/5days/${encodeURIComponent(cityName)}`
       );
 
       if (!res.ok) {
@@ -62,7 +62,7 @@ const WeatherDetails = () => {
         try {
           const body = await res.json();
           msg = body.message || body.error || msg;
-        } catch {}
+        } catch { }
         throw new Error(msg);
       }
 
@@ -92,7 +92,7 @@ const WeatherDetails = () => {
       setSaving(true);
       setSaveMsg("");
 
-      const res = await fetch("http://localhost:5000/api/favorite-cities", {
+      const res = await fetch("/api/favorite-cities", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, cityName: city }),

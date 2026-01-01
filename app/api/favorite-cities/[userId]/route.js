@@ -7,15 +7,10 @@ export async function GET(req, { params }) {
         await dbConnect();
         const { userId } = await params;
 
-        if (!userId) return NextResponse.json({ error: "userId is required" }, { status: 400 });
-
-        const cities = await FavoriteCity.find({ userId }).sort({ cityName: 1 });
-        return NextResponse.json({ success: true, cities });
-    } catch (err) {
-        console.error("Get Cities Error:", err);
-        return NextResponse.json(
-            { success: false, error: "Failed to fetch cities" },
-            { status: 500 }
-        );
+        const cities = await FavoriteCity.find({ userId });
+        return NextResponse.json(cities);
+    } catch (error) {
+        console.error("Get Cities Error:", error);
+        return NextResponse.json({ message: "Server Error" }, { status: 500 });
     }
 }

@@ -7,21 +7,22 @@ export async function PATCH(req) {
         await dbConnect();
         const { cityId, isFavorite } = await req.json();
 
-        if (!cityId) return NextResponse.json({ error: "cityId is required" }, { status: 400 });
+        if (!cityId) {
+            return NextResponse.json({ message: "cityId is required" }, { status: 400 });
+        }
 
         const city = await FavoriteCity.findById(cityId);
-        if (!city) return NextResponse.json({ error: "City not found" }, { status: 404 });
+        if (!city) {
+            return NextResponse.json({ message: "City not found" }, { status: 404 });
+        }
 
         city.isFavorite = !!isFavorite;
         city.updatedAt = new Date();
         await city.save();
 
-        return NextResponse.json({ success: true, city }, { status: 200 });
-    } catch (err) {
-        console.error("Toggle Favorite Error:", err);
-        return NextResponse.json(
-            { success: false, error: "Failed to update favorite status" },
-            { status: 500 }
-        );
+        return NextResponse.json({ success: true, city });
+    } catch (error) {
+        console.error("Toggle Favorite Error:", error);
+        return NextResponse.json({ success: false, message: "Failed to update favorite status" }, { status: 500 });
     }
 }

@@ -26,7 +26,7 @@ function Login() {
 
     try {
       // ✅ Correct API endpoint (/user/login)
-      const response = await fetch("http://localhost:5000/api/user/login", {
+      const response = await fetch("/api/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,11 +41,11 @@ function Login() {
           ...result.user,
           _id: result.user._id || result.user.id, // ensure _id exists
         };
-      
+
         localStorage.setItem("user", JSON.stringify(userWithId));
         localStorage.setItem("isLoggedIn", "true");
         navigate("/dashboard");
-      }else {
+      } else {
         setErrorMessage(result.message);
         setIsLoading(false);
       }
